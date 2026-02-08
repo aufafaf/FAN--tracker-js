@@ -24,3 +24,18 @@ const transaction = transactions.find(t => t.id === 5);
 
 // .findIndex() - cari index
 const index = transactions.findIndex(t => t.id === 5);
+
+// Object ke String (untuk simpan)
+const transactions = [
+  { id: 1, name: 'Gaji', amount: 5000000 }
+];
+const jsonString = JSON.stringify(transactions);
+// Result: '[{"id":1,"name":"Gaji","amount":5000000}]'
+
+// String ke Object (untuk load)
+const loadedData = JSON.parse(jsonString);
+// Result: array of objects
+
+// Contoh real
+localStorage.setItem('transactions', JSON.stringify(transactions));
+const saved = JSON.parse(localStorage.getItem('transactions'));
