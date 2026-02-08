@@ -39,3 +39,21 @@ const loadedData = JSON.parse(jsonString);
 // Contoh real
 localStorage.setItem('transactions', JSON.stringify(transactions));
 const saved = JSON.parse(localStorage.getItem('transactions'));
+
+// Function biasa
+function calculateTotal(transactions) {
+  return transactions.reduce((sum, t) => sum + t.amount, 0);
+}
+
+// Arrow function
+const calculateTotal = (transactions) => {
+  return transactions.reduce((sum, t) => sum + t.amount, 0);
+};
+
+// Arrow function super singkat
+const calculateTotal = transactions => 
+  transactions.reduce((sum, t) => sum + t.amount, 0);
+
+// Pakai di array methods
+transactions.filter(t => t.type === 'income');
+transactions.map(t => t.amount);
