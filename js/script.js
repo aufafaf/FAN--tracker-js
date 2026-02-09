@@ -1,59 +1,34 @@
-// .push() - tambah item ke array
-const transactions = [];
-transactions.push({ id: 1, name: 'Gaji', amount: 5000000 });
-
-// .filter() - filter array
-const incomes = transactions.filter(t => t.type === 'income');
-const expenses = transactions.filter(t => t.type === 'expense');
-
-// .map() - transform array
-const amounts = transactions.map(t => t.amount);
-// Result: [5000000, 50000, 100000]
-
-// .reduce() - hitung total
-const total = transactions.reduce((sum, t) => sum + t.amount, 0);
-// Result: 5150000
-
-// Contoh real - hitung total income
-const totalIncome = transactions
-  .filter(t => t.type === 'income')
-  .reduce((sum, t) => sum + t.amount, 0);
-
-// .find() - cari 1 item
-const transaction = transactions.find(t => t.id === 5);
-
-// .findIndex() - cari index
-const index = transactions.findIndex(t => t.id === 5);
-
-// Object ke String (untuk simpan)
-const transactions = [
-  { id: 1, name: 'Gaji', amount: 5000000 }
+const array = [1, 2, 3, 4, 5];
+const transaction = [
+  {
+    id: 1,
+    task: "belajar",
+  },
+  {
+    id: 2,
+    task: "html",
+  },
+  {
+    id: 3,
+    task: "js",
+  },
+  {
+    id: 4,
+    task: "css",
+  },
+  {
+    id: 5,
+    task: "ts",
+  },
 ];
-const jsonString = JSON.stringify(transactions);
-// Result: '[{"id":1,"name":"Gaji","amount":5000000}]'
+result = array.filter((num) => num > 3);
+console.log(result);
 
-// String ke Object (untuk load)
-const loadedData = JSON.parse(jsonString);
-// Result: array of objects
+po = array.map((num) => num * 2);
+console.log(po);
 
-// Contoh real
-localStorage.setItem('transactions', JSON.stringify(transactions));
-const saved = JSON.parse(localStorage.getItem('transactions'));
+blo = transaction.find((num) => num.id === 3);
+console.log(blo);
 
-// Function biasa
-function calculateTotal(transactions) {
-  return transactions.reduce((sum, t) => sum + t.amount, 0);
-}
-
-// Arrow function
-const calculateTotal = (transactions) => {
-  return transactions.reduce((sum, t) => sum + t.amount, 0);
-};
-
-// Arrow function super singkat
-const calculateTotal = transactions => 
-  transactions.reduce((sum, t) => sum + t.amount, 0);
-
-// Pakai di array methods
-transactions.filter(t => t.type === 'income');
-transactions.map(t => t.amount);
+plo = transaction.findIndex((num) => num.id === 3);
+console.log(plo);
