@@ -1,4 +1,4 @@
-<!doctype html>
+<!-- <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -11,5 +11,73 @@
     <main><div>halo</div></main>
     <footer>&copy; 2026 | Muhammad Falah Aufa Anggara</footer>
     <script src="./js/script.js"></script>
+  </body>
+</html> -->
+
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Expense Tracker</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>💰 Expense Tracker</h1>
+
+      <!-- Balance Section -->
+      <div class="balance-container">
+        <div class="balance-card">
+          <h3>Balance</h3>
+          <h2 id="balance">Rp 0</h2>
+        </div>
+        <div class="income-card">
+          <h3>Income</h3>
+          <h2 id="income">Rp 0</h2>
+        </div>
+        <div class="expense-card">
+          <h3>Expense</h3>
+          <h2 id="expense">Rp 0</h2>
+        </div>
+      </div>
+
+      <!-- Chart -->
+      <div class="chart-container">
+        <canvas id="myChart"></canvas>
+      </div>
+
+      <!-- Form -->
+      <form id="transaction-form">
+        <h3>Add Transaction</h3>
+        <input type="text" id="name" placeholder="Transaction name" required />
+        <input
+          type="number"
+          id="amount"
+          placeholder="Amount"
+          required
+          min="0"
+          step="1000"
+        />
+        <div class="radio-group">
+          <label>
+            <input type="radio" name="type" value="income" checked />
+            Income
+          </label>
+          <label>
+            <input type="radio" name="type" value="expense" />
+            Expense
+          </label>
+        </div>
+        <button type="submit">Add Transaction</button>
+      </form>
+
+      <!-- Transaction List -->
+      <div id="transaction-list"></div>
+    </div>
+
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="app.js"></script>
   </body>
 </html>
