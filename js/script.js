@@ -1,7 +1,7 @@
 // form dan input element
 const transactionForm = document.getElementById("transaction-form");
-const name = document.getElementById("name");
-const amount = document.getElementById("amount");
+const nameInput = document.getElementById("name");
+const amountInput = document.getElementById("amount");
 
 // display element
 const balance = document.getElementById("balance");
@@ -9,7 +9,7 @@ const income = document.getElementById("income");
 const expense = document.getElementById("expense");
 
 // container untuk list transaksi
-const container = document.getElementById("transaction-list");
+const transactionList = document.getElementById("transaction-list");
 
 // canvas untuk chart
 const canvas = document.getElementById("canvas");
@@ -37,14 +37,17 @@ function loadTransaction() {
 }
 
 console.log("Form element:", transactionForm);
-console.log("Name:", name);
-console.log("Amount:", amount);
+console.log("Name:", nameInput);
+console.log("Amount:", amountInput);
 console.log("Balance:", balance);
-console.log("list transaction:", container);
+console.log("list transaction:", transactionList);
 
 localStorage.setItem(
   "transaction",
-  JSON.stringify([{ id: 1, name: "Gaji", amount: 5000000, type: "income" }]),
+  JSON.stringify([
+    { id: 1, name: "Gaji", amount: 5000000, type: "income" },
+    { id: 2, name: "Salary", amount: 100000, type: "income" },
+  ]),
 );
 
 // localStorage.removeItem(transaction);
@@ -53,3 +56,19 @@ init();
 
 console.log(transaction.length);
 console.log(transaction[0].name);
+console.log(transaction[1].name);
+
+function addTransaction(e) {
+  e.preventDefault();
+  console.log("Form submitted");
+
+  const name = nameInput.value.trim();
+  const amount = parseFloat(amountInput.value);
+  const type = document.querySelector('input[name="type"]:checked').value;
+
+  console.log(name);
+  console.log(amount);
+  console.log(type);
+}
+
+transactionForm.addEventListener("submit", addTransaction);
