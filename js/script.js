@@ -243,3 +243,50 @@ function init() {
   
   console.log('Loaded transactions:', transactions);
 }
+
+// ==========================================
+// RENDER TRANSACTIONS (Versi Map)
+// ==========================================
+
+function renderTransactions() {
+  // Clear
+  listContainer.innerHTML = '';
+  
+  // Cek kosong
+  if (transactions.length === 0) {
+    listContainer.innerHTML = `
+      <p class="empty">Belum ada transaksi. Tambahkan transaksi pertama Anda!</p>
+    `;
+    return;
+  }
+  
+  // Map array jadi HTML, join jadi 1 string
+  const html = transactions.map(t => `
+    <div class="transaction ${t.type}">
+      <div class="transaction-info">
+        <h4>${t.name}</h4>
+        <span class="type-badge">
+          ${t.type === 'income' ? '📈 Income' : '📉 Expense'}
+        </span>
+      </div>
+      <div class="transaction-actions">
+        <span class="amount">${formatRupiah(t.amount)}</span>
+        <button class="delete-btn" data-id="${t.id}">🗑️</button>
+      </div>
+    </div>
+  `).join('');
+  
+  // Set HTML
+  listContainer.innerHTML = html;
+  
+  console.log('Rendered', transactions.length, 'transactions');
+}
+
+// Helper function format rupiah
+function formatRupiah(amount) {
+  return new Intl.NumberFormat('id-ID', {
+    style: 'currency',
+    currency: 'IDR',
+    minimumFractionDigits: 0
+  }).format(amount);
+}
