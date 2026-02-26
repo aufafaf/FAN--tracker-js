@@ -112,3 +112,8 @@ function saveTransaction() {
 }
 
 transactionForm.addEventListener("submit", addTransaction);
+
+function renderTransaction(){
+  console.log('Rendering Transaction')
+  
+}
