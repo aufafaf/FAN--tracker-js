@@ -113,7 +113,17 @@ function saveTransaction() {
 
 transactionForm.addEventListener("submit", addTransaction);
 
-function renderTransaction(){
-  console.log('Rendering Transaction')
-  
+function renderTransaction() {
+  console.log("Rendering Transaction");
+
+  transactionList.innerHTML = "";
+  console.log("List cleared");
+
+  if (transaction.length === 0) {
+    transactionList.innerHTML = `
+      <p class='empty'>Belum ada transaksi. Tambahkan transaksi pertama anda </p>
+    `;
+    console.log("No transaction to display");
+    return;
+  }
 }
