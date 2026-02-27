@@ -23,9 +23,9 @@ function init() {
 
   console.log("Loaded transaction:", transaction);
 
-  renderTransaction()
+  renderTransaction();
 
-  console.log('Loaded transaction:', transaction)
+  console.log("Loaded transaction:", transaction);
 }
 
 function loadTransaction() {
@@ -104,6 +104,7 @@ function addTransaction(e) {
   console.log("Form cleared");
 
   saveTransaction();
+  renderTransaction();
 
   alert("Transaction berhasil ditambahkan");
 }
@@ -135,16 +136,16 @@ function renderTransaction() {
     console.log("Rendering:", transaksi);
 
     const transactionHTML = `
-      <div class="transaction ${transaction.type}">
+      <div class="transaction ${transaksi.type}">
         <div class="transaction-info">
-          <h4>${transaction.name}</h4>
+          <h4>${transaksi.name}</h4>
           <span class="type-badge">
-            ${transaction.type === "income" ? "📈 Income" : "📉 Expense"}
+            ${transaksi.type === "income" ? "📈 Income" : "📉 Expense"}
           </span>
         </div>
         <div class="transaction-actions">
-          <span class="amount">Rp ${transaction.amount.toLocaleString("id-ID")}</span>
-          <button class="delete-btn" data-id="${transaction.id}">🗑️</button>
+          <span class="amount">Rp ${transaksi.amount}</span>
+          <button class="delete-btn" data-id="${transaksi.id}">🗑️</button>
         </div>
       </div>
     `;
