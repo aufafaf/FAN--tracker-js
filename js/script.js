@@ -22,6 +22,10 @@ function init() {
   loadTransaction();
 
   console.log("Loaded transaction:", transaction);
+
+  renderTransaction()
+
+  console.log('Loaded transaction:', transaction)
 }
 
 function loadTransaction() {
@@ -126,4 +130,27 @@ function renderTransaction() {
     console.log("No transaction to display");
     return;
   }
+
+  transaction.forEach(function (transaksi) {
+    console.log("Rendering:", transaksi);
+
+    const transactionHTML = `
+      <div class="transaction ${transaction.type}">
+        <div class="transaction-info">
+          <h4>${transaction.name}</h4>
+          <span class="type-badge">
+            ${transaction.type === "income" ? "📈 Income" : "📉 Expense"}
+          </span>
+        </div>
+        <div class="transaction-actions">
+          <span class="amount">Rp ${transaction.amount.toLocaleString("id-ID")}</span>
+          <button class="delete-btn" data-id="${transaction.id}">🗑️</button>
+        </div>
+      </div>
+    `;
+
+    transactionList.innerHTML += transactionHTML;
+  });
+
+  console.log("All transactions rendered");
 }
