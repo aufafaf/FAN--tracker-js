@@ -23,7 +23,7 @@ function init() {
 
   console.log("Loaded transaction:", transaction);
 
-  renderTransaction();
+  renderTransactions();
 
   console.log("Loaded transaction:", transaction);
 }
@@ -104,7 +104,7 @@ function addTransaction(e) {
   console.log("Form cleared");
 
   saveTransaction();
-  renderTransaction();
+  renderTransactions();
 
   alert("Transaction berhasil ditambahkan");
 }
@@ -118,40 +118,83 @@ function saveTransaction() {
 
 transactionForm.addEventListener("submit", addTransaction);
 
-function renderTransaction() {
-  console.log("Rendering Transaction");
+// function renderTransaction() {
+//   console.log("Rendering Transaction");
 
-  transactionList.innerHTML = "";
-  console.log("List cleared");
+//   transactionList.innerHTML = "";
+//   console.log("List cleared");
 
+//   if (transaction.length === 0) {
+//     transactionList.innerHTML = `
+//       <p class='empty'>Belum ada transaksi. Tambahkan transaksi pertama anda </p>
+//     `;
+//     console.log("No transaction to display");
+//     return;
+//   }
+
+//   transaction.forEach(function (transaksi) {
+//     console.log("Rendering:", transaksi);
+
+//     const transactionHTML = `
+//       <div class="transaction ${transaksi.type}">
+//         <div class="transaction-info">
+//           <h4>${transaksi.name}</h4>
+//           <span class="type-badge">
+//             ${transaksi.type === "income" ? "📈 Income" : "📉 Expense"}
+//           </span>
+//         </div>
+//         <div class="transaction-actions">
+//           <span class="amount">Rp ${transaksi.amount}</span>
+//           <button class="delete-btn" data-id="${transaksi.id}">🗑️</button>
+//         </div>
+//       </div>
+//     `;
+
+//     transactionList.innerHTML += transactionHTML;
+//   });
+
+//   console.log("All transactions rendered");
+// }
+
+function renderTransactions() {
+  // Clear
+  transactionList.innerHTML = '';
+  
+  // Cek kosong
   if (transaction.length === 0) {
     transactionList.innerHTML = `
-      <p class='empty'>Belum ada transaksi. Tambahkan transaksi pertama anda </p>
+      <p class="empty">Belum ada transaksi. Tambahkan transaksi pertama Anda!</p>
     `;
-    console.log("No transaction to display");
     return;
   }
-
-  transaction.forEach(function (transaksi) {
-    console.log("Rendering:", transaksi);
-
-    const transactionHTML = `
-      <div class="transaction ${transaksi.type}">
-        <div class="transaction-info">
-          <h4>${transaksi.name}</h4>
-          <span class="type-badge">
-            ${transaksi.type === "income" ? "📈 Income" : "📉 Expense"}
-          </span>
-        </div>
-        <div class="transaction-actions">
-          <span class="amount">Rp ${transaksi.amount}</span>
-          <button class="delete-btn" data-id="${transaksi.id}">🗑️</button>
-        </div>
+  
+  // Map array jadi HTML, join jadi 1 string
+  const html = transaction.map(t => `
+    <div class="transaction ${t.type}">
+      <div class="transaction-info">
+        <h4>${t.name}</h4>
+        <span class="type-badge">
+          ${t.type === 'income' ? '📈 Income' : '📉 Expense'}
+        </span>
       </div>
-    `;
+      <div class="transaction-actions">
+        <span class="amount">${formatRupiah(t.amount)}</span>
+        <button class="delete-btn" data-id="${t.id}">🗑️</button>
+      </div>
+    </div>
+  `).join('');
+  
+  // Set HTML
+  transactionList.innerHTML = html;
+  
+  console.log('Rendered', transaction.length, 'transactions');
+}
 
-    transactionList.innerHTML += transactionHTML;
-  });
-
-  console.log("All transactions rendered");
+// Helper function format rupiah
+function formatRupiah(amount) {
+  return new Intl.NumberFormat('id-ID', {
+    style: 'currency',
+    currency: 'IDR',
+    minimumFractionDigits: 0
+  }).format(amount);
 }
