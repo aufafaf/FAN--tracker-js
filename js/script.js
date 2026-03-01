@@ -118,48 +118,48 @@ function saveTransaction() {
 
 transactionForm.addEventListener("submit", addTransaction);
 
-// function renderTransaction() {
-//   console.log("Rendering Transaction");
+function renderTransaction() {
+  console.log("Rendering Transaction");
 
-//   transactionList.innerHTML = "";
-//   console.log("List cleared");
+  transactionList.innerHTML = "";
+  console.log("List cleared");
 
-//   if (transaction.length === 0) {
-//     transactionList.innerHTML = `
-//       <p class='empty'>Belum ada transaksi. Tambahkan transaksi pertama anda </p>
-//     `;
-//     console.log("No transaction to display");
-//     return;
-//   }
+  if (transaction.length === 0) {
+    transactionList.innerHTML = `
+      <p class='empty'>Belum ada transaksi. Tambahkan transaksi pertama anda </p>
+    `;
+    console.log("No transaction to display");
+    return;
+  }
 
-//   transaction.forEach(function (transaksi) {
-//     console.log("Rendering:", transaksi);
+  transaction.forEach(function (transaksi) {
+    console.log("Rendering:", transaksi);
 
-//     const transactionHTML = `
-//       <div class="transaction ${transaksi.type}">
-//         <div class="transaction-info">
-//           <h4>${transaksi.name}</h4>
-//           <span class="type-badge">
-//             ${transaksi.type === "income" ? "📈 Income" : "📉 Expense"}
-//           </span>
-//         </div>
-//         <div class="transaction-actions">
-//           <span class="amount">Rp ${transaksi.amount}</span>
-//           <button class="delete-btn" data-id="${transaksi.id}">🗑️</button>
-//         </div>
-//       </div>
-//     `;
+    const transactionHTML = `
+      <div class="transaction ${transaksi.type}">
+        <div class="transaction-info">
+          <h4>${transaksi.name}</h4>
+          <span class="type-badge">
+            ${transaksi.type === "income" ? "📈 Income" : "📉 Expense"}
+          </span>
+        </div>
+        <div class="transaction-actions">
+          <span class="amount">Rp ${transaksi.amount}</span>
+          <button class="delete-btn" data-id="${transaksi.id}">🗑️</button>
+        </div>
+      </div>
+    `;
 
-//     transactionList.innerHTML += transactionHTML;
-//   });
+    transactionList.innerHTML += transactionHTML;
+  });
 
-//   console.log("All transactions rendered");
-// }
+  console.log("All transactions rendered");
+}
 
 function renderTransactions() {
   // Clear
-  transactionList.innerHTML = '';
-  
+  transactionList.innerHTML = "";
+
   // Cek kosong
   if (transaction.length === 0) {
     transactionList.innerHTML = `
@@ -167,14 +167,16 @@ function renderTransactions() {
     `;
     return;
   }
-  
+
   // Map array jadi HTML, join jadi 1 string
-  const html = transaction.map(t => `
+  const html = transaction
+    .map(
+      (t) => `
     <div class="transaction ${t.type}">
       <div class="transaction-info">
         <h4>${t.name}</h4>
         <span class="type-badge">
-          ${t.type === 'income' ? '📈 Income' : '📉 Expense'}
+          ${t.type === "income" ? "📈 Income" : "📉 Expense"}
         </span>
       </div>
       <div class="transaction-actions">
@@ -182,19 +184,21 @@ function renderTransactions() {
         <button class="delete-btn" data-id="${t.id}">🗑️</button>
       </div>
     </div>
-  `).join('');
-  
+  `,
+    )
+    .join("");
+
   // Set HTML
   transactionList.innerHTML = html;
-  
-  console.log('Rendered', transaction.length, 'transactions');
+
+  console.log("Rendered", transaction.length, "transactions");
 }
 
 // Helper function format rupiah
 function formatRupiah(amount) {
-  return new Intl.NumberFormat('id-ID', {
-    style: 'currency',
-    currency: 'IDR',
-    minimumFractionDigits: 0
+  return new Intl.NumberFormat("id-ID", {
+    style: "currency",
+    currency: "IDR",
+    minimumFractionDigits: 0,
   }).format(amount);
 }
